@@ -20,10 +20,9 @@ export default function Signup() {
 
 	async function submitHandler(event) {
 		event.preventDefault();
-		console.log(formData);
 		try {
 			await fetch('/api/v1/users/register', {
-				method: 'POST', // or 'PUT'
+				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
