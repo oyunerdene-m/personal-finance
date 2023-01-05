@@ -19,9 +19,14 @@ function App() {
 							Hello, <Link to='/login'>Logout</Link>
 						</li>
 					) : (
-						<li>
-							<Link to='/signup'>Sign up</Link>
-						</li>
+						<>
+							<li>
+								<Link to='/signup'>Sign up</Link>
+							</li>
+							<li>
+								<Link to='/login'>Login</Link>
+							</li>
+						</>
 					)}
 				</ul>
 			</nav>

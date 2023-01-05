@@ -1,7 +1,10 @@
 import Form from './Form';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { fetchData } from '../../lib/fetchData';
 
 export default function Signup() {
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -21,24 +24,14 @@ export default function Signup() {
 	async function submitHandler(event) {
 		event.preventDefault();
 		try {
-			await fetch('/api/v1/users/register', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(formData),
-			})
-				.then((response) => response.json())
-				.then((data) => {
-					console.log('Success:', data);
-				})
-				.catch((error) => {
-					console.error('Error:', error);
-				});
+			const response = await fetchData('/api/v1/users/register', 'POST', formData);
+			console.log('successfully registered!', response.user);
+			setFormData(response.user);
 		} catch (error) {
 			console.error(error);
 			alert(error);
 		}
+		navigate('/login');
 	}
 	return <Form formType='Signup' onSubmit={submitHandler} onChange={changeHandler} />;
 }
