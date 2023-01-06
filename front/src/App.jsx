@@ -24,6 +24,8 @@ function App() {
 		}
 	}
 
+	if (isUserLoading) return 'Loading...';
+
 	const path = location.pathname;
 
 	if (!currentUser && path !== '/login' && path !== '/signup') {
@@ -32,7 +34,6 @@ function App() {
 	if (currentUser && path === '/login') {
 		return <Navigate to='/dashboard' />;
 	}
-	if (isUserLoading) return 'Loading...';
 
 	return (
 		<>

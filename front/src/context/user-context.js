@@ -5,7 +5,7 @@ export const CurrentUserContext = createContext({ currentUser: null });
 
 export const CurrentUserProvider = (props) => {
 	const [currentUser, setCurrentUser] = useState(null);
-	const [isUserLoading, setIsUserLoading] = useState(false);
+	const [isUserLoading, setIsUserLoading] = useState(true);
 	useEffect(() => {
 		async function getCurrentUser() {
 			try {

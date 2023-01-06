@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { Navigate } from 'react-router-dom';
 import AccountForm from './AccountForm';
 import { AccountsContext } from '../../../context/accounts-context';
 import { fetchData } from '../../../lib/fetchData';
@@ -27,8 +28,9 @@ export default function AddAccount() {
 	async function submitHandler(event) {
 		event.preventDefault();
 		try {
-			const res = await fetchData('api/v1/accounts/add', 'POST', accountData);
-			setAccounts((prevAccounts) => [...prevAccounts, res.account]);
+			const data = await fetchData('api/v1/accounts/add', 'POST', accountData);
+			setAccounts((prevAccounts) => [...prevAccounts, data.account]);
+			window.location.reload();
 		} catch (error) {
 			console.error(error);
 			alert(error);

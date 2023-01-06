@@ -11,6 +11,11 @@ export const AccountsProvider = ({ children }) => {
 		async function getAccounts() {
 			try {
 				setIsAccountsLoading(true);
+				const res = await fetchData('/api/v1/users/current-user', 'GET', undefined);
+				const currentUser = res.user;
+				if (!currentUser) {
+					return;
+				}
 				const response = await fetchData('api/v1/accounts', 'GET', undefined);
 				setAccounts(response.accounts);
 			} catch (error) {
