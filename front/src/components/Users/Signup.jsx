@@ -26,7 +26,6 @@ export default function Signup() {
 		try {
 			const response = await fetchData('/api/v1/users/register', 'POST', formData);
 			console.log('successfully registered!', response.user);
-			setFormData(response.user);
 		} catch (error) {
 			console.error(error);
 			alert(error);

@@ -1,22 +1,46 @@
 import './App.css';
-import { Link, Route, Routes } from 'react-router-dom';
-// import { useContext } from 'react';
-// import { CurrentUserContext } from './context/user-context';
+import { Link, Route, Routes, useLocation, Navigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { CurrentUserContext } from './context/user-context';
+import { fetchData } from './lib/fetchData';
 import Home from './pages/home';
 import Signup from './components/Users/Signup';
 import Login from './components/Users/Login';
+import Accounts from './pages/accounts';
 
 function App() {
-	const currentUser = null;
-	// const { currentUser } = useContext(CurrentUserContext);
-	// console.log('currentUser', currentUser);
+	const location = useLocation();
+	const { currentUser, isUserLoading } = useContext(CurrentUserContext);
+	console.log('currenUser', currentUser);
+	async function logoutHandler() {
+		try {
+			await fetchData('/api/v1/users/logout', 'GET', undefined);
+			window.location.reload();
+		} catch (error) {
+			console.error(error);
+			alert(error);
+		}
+	}
+
+	if (isUserLoading) return 'Loading...';
+	const path = location.pathname;
+	if (!currentUser && path !== '/login' && path !== '/signup') {
+		return <Navigate to='/login' />;
+	}
+	if (currentUser && path === '/login') {
+		return <Navigate to='/accounts' />;
+	}
+
 	return (
 		<>
 			<nav>
 				<ul>
-					{currentUser !== null ? (
+					{currentUser ? (
 						<li>
-							Hello, <Link to='/login'>Logout</Link>
+							Hello, {currentUser.name}{' '}
+							<Link onClick={logoutHandler} to='/login'>
+								Logout
+							</Link>
 						</li>
 					) : (
 						<>
@@ -31,9 +55,10 @@ function App() {
 				</ul>
 			</nav>
 			<Routes>
-				<Route path='/signup' element={<Signup />} />
-				<Route path='/login' element={<Login />} />
-				<Route path='/' element={<Home currentUser={currentUser} />} />
+				<Route exact path='/signup' element={<Signup />} />
+				<Route exact path='/login' element={<Login />} />
+				<Route exact path='/' element={<Home />} />
+				<Route exact path='/accounts' element={<Accounts />} />
 			</Routes>
 		</>
 	);
