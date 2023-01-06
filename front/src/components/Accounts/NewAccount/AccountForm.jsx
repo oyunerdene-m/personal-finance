@@ -1,22 +1,28 @@
-export default function AccountForm({ onChange, onSubmit }) {
+export default function AccountForm({ onChange, onSubmit, editedAccount, formType }) {
 	const accountTypes = ['savings', 'cash', 'loan', 'credit', 'daily'];
 	const currencies = ['EUR', 'USD', 'MNT'];
 
 	return (
 		<>
-			<h3>Add account</h3>
+			<h3>{formType === 'edit' ? 'Edit' : 'Add'} account</h3>
 			<form onSubmit={onSubmit}>
 				<div>
 					<label htmlFor='name'>Account name:</label>
-					<input onChange={onChange} type='text' id='name' name='name' />
+					<input value={editedAccount.name} onChange={onChange} type='text' id='name' name='name' />
 				</div>
 				<div>
 					<label htmlFor='amount'>Amount:</label>
-					<input onChange={onChange} type='number' id='amount' name='amount' />
+					<input
+						value={editedAccount.amount}
+						onChange={onChange}
+						type='number'
+						id='amount'
+						name='amount'
+					/>
 				</div>
 				<div>
 					<label htmlFor='type'>Type:</label>
-					<select onChange={onChange} name='type' id='type'>
+					<select value={editedAccount.type} onChange={onChange} name='type' id='type'>
 						<option value=''>--Choose type--</option>
 						{accountTypes.map((type) => (
 							<option key={type} value={type}>
@@ -27,11 +33,17 @@ export default function AccountForm({ onChange, onSubmit }) {
 				</div>
 				<div>
 					<label htmlFor='description'>Description:</label>
-					<input onChange={onChange} type='text' id='description' name='description' />
+					<input
+						value={editedAccount.description}
+						onChange={onChange}
+						type='text'
+						id='description'
+						name='description'
+					/>
 				</div>
 				<div>
 					<label htmlFor='currency'>Currency:</label>
-					<select onChange={onChange} name='currency' id='currency'>
+					<select value={editedAccount.currency} onChange={onChange} name='currency' id='currency'>
 						<option value=''>--Choose currency--</option>
 						{currencies.map((cur) => (
 							<option key={cur} value={cur}>
@@ -40,7 +52,7 @@ export default function AccountForm({ onChange, onSubmit }) {
 						))}
 					</select>
 				</div>
-				<button>Add</button>
+				<button>{formType === 'edit' ? 'Save' : 'Add'}</button>
 			</form>
 		</>
 	);

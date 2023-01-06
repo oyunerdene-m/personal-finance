@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Account({ account }) {
 	const { name, description, amount, currency, id } = account;
 	return (
@@ -9,7 +11,9 @@ export default function Account({ account }) {
 					{currency}
 				</span>
 				<div>
-					<button>edit</button>
+					<button>
+						<Link to={`/accounts/edit/${id}`}>edit</Link>
+					</button>
 					<button>delete</button>
 				</div>
 			</h3>

@@ -16,7 +16,7 @@ export const AccountsProvider = ({ children }) => {
 				if (!currentUser) {
 					return;
 				}
-				const response = await fetchData('api/v1/accounts', 'GET', undefined);
+				const response = await fetchData('/api/v1/accounts', 'GET', undefined);
 				setAccounts(response.accounts);
 			} catch (error) {
 				console.error(error);

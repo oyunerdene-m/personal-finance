@@ -10,6 +10,7 @@ import Login from './components/Users/Login';
 import Dashboard from './pages/dashboard';
 import Accounts from './pages/accounts';
 import AddAccount from './components/Accounts/NewAccount/AddAccount';
+import EditAccount from './components/Accounts/EditAccount';
 
 function App() {
 	const location = useLocation();
@@ -85,6 +86,14 @@ function App() {
 					element={
 						<AccountsProvider>
 							<AddAccount />
+						</AccountsProvider>
+					}
+				/>
+				<Route
+					path='/accounts/edit/:id'
+					element={
+						<AccountsProvider>
+							<EditAccount />
 						</AccountsProvider>
 					}
 				/>
