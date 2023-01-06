@@ -7,6 +7,7 @@ import Home from './pages/home';
 import Signup from './components/Users/Signup';
 import Login from './components/Users/Login';
 import Dashboard from './pages/dashboard';
+import Accounts from './pages/accounts';
 
 function App() {
 	const location = useLocation();
@@ -59,7 +60,8 @@ function App() {
 				<Route exact path='/signup' element={<Signup />} />
 				<Route exact path='/login' element={<Login />} />
 				<Route exact path='/' element={<Home />} />
-				<Route exact path='/accounts' element={<Dashboard />} />
+				<Route exact path='/dashboard' element={<Dashboard />} />
+				<Route exact path='/accounts' element={<Accounts />} />
 			</Routes>
 		</>
 	);
