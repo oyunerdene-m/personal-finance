@@ -1,11 +1,10 @@
 import { useState, useContext } from 'react';
 import AccountForm from './AccountForm';
-import { AccountsContext } from '../../context/accounts-context';
-import { fetchData } from '../../lib/fetchData';
+import { AccountsContext } from '../../../context/accounts-context';
+import { fetchData } from '../../../lib/fetchData';
 
 export default function AddAccount() {
-	const { accounts, setAccounts } = useContext(AccountsContext);
-	console.log('accounts', accounts);
+	const { setAccounts } = useContext(AccountsContext);
 
 	const [accountData, setAccountData] = useState({
 		name: '',
