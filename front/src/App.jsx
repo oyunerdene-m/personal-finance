@@ -3,6 +3,7 @@ import { Link, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { CurrentUserContext } from './context/user-context';
 import { fetchData } from './lib/fetchData';
+import { AccountsProvider } from './context/accounts-context';
 import Home from './pages/home';
 import Signup from './components/Users/Signup';
 import Login from './components/Users/Login';
@@ -60,8 +61,24 @@ function App() {
 				<Route exact path='/signup' element={<Signup />} />
 				<Route exact path='/login' element={<Login />} />
 				<Route exact path='/' element={<Home />} />
-				<Route exact path='/dashboard' element={<Dashboard />} />
-				<Route exact path='/accounts' element={<Accounts />} />
+				<Route
+					exact
+					path='/dashboard'
+					element={
+						<AccountsProvider>
+							<Dashboard />
+						</AccountsProvider>
+					}
+				/>
+				<Route
+					exact
+					path='/accounts'
+					element={
+						<AccountsProvider>
+							<Accounts />
+						</AccountsProvider>
+					}
+				/>
 			</Routes>
 		</>
 	);
