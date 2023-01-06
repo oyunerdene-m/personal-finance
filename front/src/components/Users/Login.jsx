@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import { fetchData } from '../../lib/fetchData';
 import Form from './Form';
 

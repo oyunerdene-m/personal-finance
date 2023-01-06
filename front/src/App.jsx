@@ -11,7 +11,7 @@ import Accounts from './pages/accounts';
 function App() {
 	const location = useLocation();
 	const { currentUser, isUserLoading } = useContext(CurrentUserContext);
-	console.log('currenUser', currentUser);
+
 	async function logoutHandler() {
 		try {
 			await fetchData('/api/v1/users/logout', 'GET', undefined);
@@ -22,14 +22,15 @@ function App() {
 		}
 	}
 
-	if (isUserLoading) return 'Loading...';
 	const path = location.pathname;
+
 	if (!currentUser && path !== '/login' && path !== '/signup') {
 		return <Navigate to='/login' />;
 	}
 	if (currentUser && path === '/login') {
 		return <Navigate to='/accounts' />;
 	}
+	if (isUserLoading) return 'Loading...';
 
 	return (
 		<>
