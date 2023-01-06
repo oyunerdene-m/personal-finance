@@ -1,10 +1,11 @@
 import { useState, useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AccountForm from './AccountForm';
 import { AccountsContext } from '../../../context/accounts-context';
 import { fetchData } from '../../../lib/fetchData';
 
 export default function AddAccount() {
+	const navigate = useNavigate();
 	const { setAccounts } = useContext(AccountsContext);
 
 	const [accountData, setAccountData] = useState({
@@ -30,7 +31,7 @@ export default function AddAccount() {
 		try {
 			const data = await fetchData('api/v1/accounts/add', 'POST', accountData);
 			setAccounts((prevAccounts) => [...prevAccounts, data.account]);
-			window.location.reload();
+			navigate('/dashboard');
 		} catch (error) {
 			console.error(error);
 			alert(error);

@@ -5,6 +5,7 @@ export default function Dashboard() {
 	return (
 		<>
 			<h1>Dashboard page!!</h1>
+
 			<AccountList />
 			<button>
 				<Link to='/accounts'>Add account</Link>
