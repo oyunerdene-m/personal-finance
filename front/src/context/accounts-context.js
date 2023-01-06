@@ -5,17 +5,19 @@ export const AccountsContext = createContext({ accounts: [] });
 
 export const AccountsProvider = ({ children }) => {
 	const [accounts, setAccounts] = useState([]);
-	const [isAccountsLoading, setIsAccountsLoading] = useState(false);
+	const [isAccountsLoading, setIsAccountsLoading] = useState(true);
 
 	useEffect(() => {
-		function getAccounts() {
+		async function getAccounts() {
 			try {
 				setIsAccountsLoading(true);
-				const response = fetchData('api/v1/accounts', 'GET', undefined);
-				console.log(response);
+				const response = await fetchData('api/v1/accounts', 'GET', undefined);
+				setAccounts(response.accounts);
 			} catch (error) {
 				console.error(error);
 				alert(error);
+			} finally {
+				setIsAccountsLoading(false);
 			}
 		}
 		getAccounts();

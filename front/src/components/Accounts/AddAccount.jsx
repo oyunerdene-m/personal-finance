@@ -1,7 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import AccountForm from './AccountForm';
+import { AccountsContext } from '../../context/accounts-context';
+import { fetchData } from '../../lib/fetchData';
 
 export default function AddAccount() {
+	const { accounts, setAccounts } = useContext(AccountsContext);
+	console.log('accounts', accounts);
+
 	const [accountData, setAccountData] = useState({
 		name: '',
 		amount: 0,
@@ -15,14 +20,20 @@ export default function AddAccount() {
 		setAccountData((prevData) => {
 			return {
 				...prevData,
-				[name]: value,
+				[name]: name === 'amount' ? parseInt(value) : value,
 			};
 		});
 	}
 
-	function submitHandler(event) {
+	async function submitHandler(event) {
 		event.preventDefault();
-		console.log(accountData);
+		try {
+			const res = await fetchData('api/v1/accounts/add', 'POST', accountData);
+			setAccounts((prevAccounts) => [...prevAccounts, res.account]);
+		} catch (error) {
+			console.error(error);
+			alert(error);
+		}
 	}
 
 	return <AccountForm onSubmit={submitHandler} onChange={changeHandler} />;
