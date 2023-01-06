@@ -6,7 +6,7 @@ import { fetchData } from './lib/fetchData';
 import Home from './pages/home';
 import Signup from './components/Users/Signup';
 import Login from './components/Users/Login';
-import Accounts from './pages/accounts';
+import Dashboard from './pages/dashboard';
 
 function App() {
 	const location = useLocation();
@@ -28,7 +28,7 @@ function App() {
 		return <Navigate to='/login' />;
 	}
 	if (currentUser && path === '/login') {
-		return <Navigate to='/accounts' />;
+		return <Navigate to='/dashboard' />;
 	}
 	if (isUserLoading) return 'Loading...';
 
@@ -59,7 +59,7 @@ function App() {
 				<Route exact path='/signup' element={<Signup />} />
 				<Route exact path='/login' element={<Login />} />
 				<Route exact path='/' element={<Home />} />
-				<Route exact path='/accounts' element={<Accounts />} />
+				<Route exact path='/accounts' element={<Dashboard />} />
 			</Routes>
 		</>
 	);
