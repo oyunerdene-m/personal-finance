@@ -1,5 +1,5 @@
 export default function Account({ account }) {
-	const { name, description, amount, currency } = account;
+	const { name, description, amount, currency, id } = account;
 	return (
 		<li>
 			<h3>
@@ -8,6 +8,10 @@ export default function Account({ account }) {
 					{amount}
 					{currency}
 				</span>
+				<div>
+					<button>edit</button>
+					<button>delete</button>
+				</div>
 			</h3>
 			<p>{description}</p>
 		</li>

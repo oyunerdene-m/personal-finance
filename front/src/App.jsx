@@ -9,6 +9,7 @@ import Signup from './components/Users/Signup';
 import Login from './components/Users/Login';
 import Dashboard from './pages/dashboard';
 import Accounts from './pages/accounts';
+import AddAccount from './components/Accounts/NewAccount/AddAccount';
 
 function App() {
 	const location = useLocation();
@@ -72,11 +73,18 @@ function App() {
 					}
 				/>
 				<Route
-					exact
 					path='/accounts'
 					element={
 						<AccountsProvider>
 							<Accounts />
+						</AccountsProvider>
+					}
+				/>
+				<Route
+					path='/accounts/new'
+					element={
+						<AccountsProvider>
+							<AddAccount />
 						</AccountsProvider>
 					}
 				/>

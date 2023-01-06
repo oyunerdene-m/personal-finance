@@ -29,7 +29,7 @@ export default function AddAccount() {
 	async function submitHandler(event) {
 		event.preventDefault();
 		try {
-			const data = await fetchData('api/v1/accounts/add', 'POST', accountData);
+			const data = await fetchData('/api/v1/accounts/add', 'POST', accountData);
 			setAccounts((prevAccounts) => [...prevAccounts, data.account]);
 			navigate('/dashboard');
 		} catch (error) {

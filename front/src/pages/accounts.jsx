@@ -1,5 +1,5 @@
-import AddAccount from '../components/Accounts/NewAccount/AddAccount';
+import AccountList from '../components/Accounts/Accounts/AccountList';
 
 export default function Accounts() {
-	return <AddAccount />;
+	return <AccountList />;
 }
