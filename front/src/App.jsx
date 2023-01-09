@@ -37,69 +37,50 @@ function App() {
 		return <Navigate to='/dashboard' />;
 	}
 
-	return (
+	const loddedInState = (
 		<>
 			<nav>
 				<ul>
-					{currentUser ? (
-						<li>
-							Hello, {currentUser.name}{' '}
-							<Link onClick={logoutHandler} to='/login'>
-								Logout
-							</Link>
-						</li>
-					) : (
-						<>
-							<li>
-								<Link to='/signup'>Sign up</Link>
-							</li>
-							<li>
-								<Link to='/login'>Login</Link>
-							</li>
-						</>
-					)}
+					<li>
+						{currentUser && `Hello, ${currentUser.name}`}{' '}
+						<Link onClick={logoutHandler} to='/login'>
+							Logout
+						</Link>
+					</li>
+				</ul>
+			</nav>
+			<AccountsProvider>
+				<Routes>
+					<Route exact path='/dashboard' element={<Dashboard />} />
+					<Route path='/accounts' element={<Accounts />} />
+					<Route path='/accounts/new' element={<AddAccount />} />
+					<Route path='/accounts/edit/:id' element={<EditAccount />} />
+				</Routes>
+			</AccountsProvider>
+		</>
+	);
+
+	const notLoggedInState = (
+		<>
+			<nav>
+				<ul>
+					<li>
+						<Link to='/signup'>Sign up</Link>
+					</li>
+					<li>
+						<Link to='/login'>Login</Link>
+					</li>
 				</ul>
 			</nav>
 			<Routes>
 				<Route exact path='/signup' element={<Signup />} />
 				<Route exact path='/login' element={<Login />} />
 				<Route exact path='/' element={<Home />} />
-				<Route
-					exact
-					path='/dashboard'
-					element={
-						<AccountsProvider>
-							<Dashboard />
-						</AccountsProvider>
-					}
-				/>
-				<Route
-					path='/accounts'
-					element={
-						<AccountsProvider>
-							<Accounts />
-						</AccountsProvider>
-					}
-				/>
-				<Route
-					path='/accounts/new'
-					element={
-						<AccountsProvider>
-							<AddAccount />
-						</AccountsProvider>
-					}
-				/>
-				<Route
-					path='/accounts/edit/:id'
-					element={
-						<AccountsProvider>
-							<EditAccount />
-						</AccountsProvider>
-					}
-				/>
 			</Routes>
 		</>
 	);
+
+	return currentUser ? loddedInState : notLoggedInState;
 }
 
 export default App;

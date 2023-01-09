@@ -38,5 +38,12 @@ export default function AddAccount() {
 		}
 	}
 
-	return <AccountForm formType='add' onSubmit={submitHandler} onChange={changeHandler} />;
+	return (
+		<AccountForm
+			editedAccount={accountData}
+			formType='add'
+			onSubmit={submitHandler}
+			onChange={changeHandler}
+		/>
+	);
 }

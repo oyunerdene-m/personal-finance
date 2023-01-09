@@ -1,9 +1,11 @@
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 import { fetchData } from '../lib/fetchData';
+import { CurrentUserContext } from './user-context';
 
 export const AccountsContext = createContext({ accounts: [] });
 
 export const AccountsProvider = ({ children }) => {
+	const { currentUser } = useContext(CurrentUserContext);
 	const [accounts, setAccounts] = useState([]);
 	const [isAccountsLoading, setIsAccountsLoading] = useState(true);
 
@@ -11,11 +13,6 @@ export const AccountsProvider = ({ children }) => {
 		async function getAccounts() {
 			try {
 				setIsAccountsLoading(true);
-				const res = await fetchData('/api/v1/users/current-user', 'GET', undefined);
-				const currentUser = res.user;
-				if (!currentUser) {
-					return;
-				}
 				const response = await fetchData('/api/v1/accounts', 'GET', undefined);
 				setAccounts(response.accounts);
 			} catch (error) {
@@ -25,8 +22,10 @@ export const AccountsProvider = ({ children }) => {
 				setIsAccountsLoading(false);
 			}
 		}
-		getAccounts();
-	}, []);
+		if (currentUser) {
+			getAccounts();
+		}
+	}, [currentUser]);
 
 	return (
 		<AccountsContext.Provider value={{ accounts, setAccounts, isAccountsLoading }}>

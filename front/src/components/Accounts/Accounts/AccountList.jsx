@@ -1,12 +1,6 @@
-import { useContext } from 'react';
-import { AccountsContext } from '../../../context/accounts-context';
 import Account from './Account';
 
-export default function AccountList() {
-	const { accounts, isAccountsLoading } = useContext(AccountsContext);
-
-	if (accounts.length === 0) return <h4>There is no accounts yet.</h4>;
-	if (isAccountsLoading) return 'Loading...';
+export default function AccountList({ accounts }) {
 	return (
 		<div>
 			<h2>Accounts:</h2>
