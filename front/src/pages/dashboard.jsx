@@ -11,6 +11,9 @@ export default function Dashboard() {
 			<Link to='/accounts'>
 				<p>Accounts page</p>
 			</Link>
+			<Link to='/transactions'>
+				<p>Transactions page</p>
+			</Link>
 			<Accounts />
 		</>
 	);
