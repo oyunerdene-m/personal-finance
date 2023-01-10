@@ -21,7 +21,7 @@ export default function AddAccount() {
 		setAccountData((prevData) => {
 			return {
 				...prevData,
-				[name]: name === 'amount' ? parseInt(value) : value,
+				[name]: name === 'amount' ? Number(value) : value,
 			};
 		});
 	}

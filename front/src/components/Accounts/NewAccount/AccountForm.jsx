@@ -18,6 +18,7 @@ export default function AccountForm({ onChange, onSubmit, editedAccount, formTyp
 						type='number'
 						id='amount'
 						name='amount'
+						min={0}
 					/>
 				</div>
 				<div>

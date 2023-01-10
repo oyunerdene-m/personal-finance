@@ -8,6 +8,9 @@ export default function Dashboard() {
 			<button>
 				<Link to='/accounts/new'>Add account</Link>
 			</button>
+			<Link to='/accounts'>
+				<p>Accounts page</p>
+			</Link>
 			<Accounts />
 		</>
 	);

@@ -59,7 +59,7 @@ export default function EditAccount() {
 	}
 
 	if (isAccountLoading) return 'Loading...';
-	if (isSubmitted) return <Navigate to='/accounts' />;
+	if (isSubmitted) return <Navigate to='/dashboard' />;
 	return (
 		<AccountForm
 			formType='edit'

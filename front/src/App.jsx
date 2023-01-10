@@ -11,6 +11,7 @@ import Dashboard from './pages/dashboard';
 import Accounts from './pages/accounts';
 import AddAccount from './components/Accounts/NewAccount/AddAccount';
 import EditAccount from './components/Accounts/EditAccount';
+import Transactions from './pages/transactions';
 
 function App() {
 	const location = useLocation();
@@ -49,14 +50,42 @@ function App() {
 					</li>
 				</ul>
 			</nav>
-			<AccountsProvider>
-				<Routes>
-					<Route exact path='/dashboard' element={<Dashboard />} />
-					<Route path='/accounts' element={<Accounts />} />
-					<Route path='/accounts/new' element={<AddAccount />} />
-					<Route path='/accounts/edit/:id' element={<EditAccount />} />
-				</Routes>
-			</AccountsProvider>
+			<Routes>
+				<Route
+					exact
+					path='/dashboard'
+					element={
+						<AccountsProvider>
+							<Dashboard />
+						</AccountsProvider>
+					}
+				/>
+				<Route
+					path='/accounts'
+					element={
+						<AccountsProvider>
+							<Accounts />
+						</AccountsProvider>
+					}
+				/>
+				<Route
+					path='/accounts/new'
+					element={
+						<AccountsProvider>
+							<AddAccount />
+						</AccountsProvider>
+					}
+				/>
+				<Route
+					path='/accounts/edit/:id'
+					element={
+						<AccountsProvider>
+							<EditAccount />
+						</AccountsProvider>
+					}
+				/>
+				<Route path='/transactions' element={<Transactions />}></Route>
+			</Routes>
 		</>
 	);
 

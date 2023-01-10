@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function Account({ account }) {
+export default function Account({ account, onDelete }) {
 	const { name, description, amount, currency, id } = account;
 	return (
 		<li>
@@ -14,7 +14,13 @@ export default function Account({ account }) {
 					<button>
 						<Link to={`/accounts/edit/${id}`}>edit</Link>
 					</button>
-					<button>delete</button>
+					<button
+						onClick={() => {
+							onDelete(id);
+						}}
+					>
+						delete
+					</button>
 				</div>
 			</h3>
 			<p>{description}</p>
