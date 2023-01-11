@@ -6,15 +6,15 @@ export default function TransactionForm({ transactionType, onChange, onSubmit })
 	const { accounts } = useContext(AccountsContext);
 
 	let account;
-	if (transactionType === 'expense') {
+	if (transactionType === 'income') {
 		account = (
 			<div>
-				<label htmlFor='from'>From:</label>
-				<select onChange={onChange} name='from' id='from'>
+				<label htmlFor='to'>To</label>
+				<select onChange={onChange} name='to' id='to'>
 					<option value=''>Choose account</option>
 					{accounts.map((account) => {
 						return (
-							<option key={account.id} value={account.name}>
+							<option key={account.id} value={account.id}>
 								{account.name}
 							</option>
 						);
@@ -22,15 +22,15 @@ export default function TransactionForm({ transactionType, onChange, onSubmit })
 				</select>
 			</div>
 		);
-	} else if (transactionType === 'income') {
+	} else if (transactionType === 'expense') {
 		account = (
 			<div>
-				<label htmlFor='to'>To:</label>
-				<select onChange={onChange} name='to' id='to'>
+				<label htmlFor='from'>From</label>
+				<select onChange={onChange} name='from' id='from'>
 					<option value=''>Choose account</option>
 					{accounts.map((account) => {
 						return (
-							<option key={account.id} value={account.name}>
+							<option key={account.id} value={account.id}>
 								{account.name}
 							</option>
 						);
@@ -48,7 +48,7 @@ export default function TransactionForm({ transactionType, onChange, onSubmit })
 						<option value=''>Choose account</option>
 						{accounts.map((account) => {
 							return (
-								<option key={account.id} value={account.name}>
+								<option key={account.id} value={account.id}>
 									{account.name}
 								</option>
 							);
@@ -61,7 +61,7 @@ export default function TransactionForm({ transactionType, onChange, onSubmit })
 						<option value=''>Choose account</option>
 						{accounts.map((account) => {
 							return (
-								<option key={account.id} value={account.name}>
+								<option key={account.id} value={account.id}>
 									{account.name}
 								</option>
 							);
@@ -75,10 +75,6 @@ export default function TransactionForm({ transactionType, onChange, onSubmit })
 	return (
 		<>
 			<form onSubmit={onSubmit}>
-				<div>
-					<label htmlFor='date'>Date:</label>
-					<input onChange={onChange} type='date' id='date' name='date' />
-				</div>
 				<div>
 					<label htmlFor='amount'>Amount:</label>
 					<input onChange={onChange} type='amount' id='amount' min={0} name='amount' />
