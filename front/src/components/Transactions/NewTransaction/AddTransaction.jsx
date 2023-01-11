@@ -26,50 +26,48 @@ export default function AddTransaction() {
 		});
 	}
 
+	const copy = { ...transactionData };
+	let id;
+	if (transactionType === 'income') {
+		id = copy.to;
+	} else if (transactionType === 'expense') {
+		id = copy.from;
+	}
+	const data = {
+		type: transactionType,
+		amount: copy.amount,
+		accountId: id,
+		description: copy.description,
+		category: copy.category,
+	};
+
+	const transferToData = {
+		type: 'income',
+		amount: copy.amount,
+		accountId: copy.to,
+		description: copy.description,
+		category: '',
+	};
+
+	const transferFromData = {
+		type: 'expense',
+		amount: copy.amount,
+		accountId: copy.from,
+		description: copy.description,
+		category: '',
+	};
+
 	async function submitHandler(event) {
 		event.preventDefault();
-		const copy = { ...transactionData };
-		let id;
-		if (transactionType === 'income') {
-			id = copy.to;
-		} else if (transactionType === 'expense') {
-			id = copy.from;
-		}
-		const data = {
-			type: transactionType,
-			amount: copy.amount,
-			accountId: id,
-			description: copy.description,
-			category: copy.category,
-		};
-
-		const transferToData = {
-			type: 'income',
-			amount: copy.amount,
-			accountId: copy.to,
-			description: copy.description,
-			category: '',
-		};
-
-		const transferFromData = {
-			type: 'expense',
-			amount: copy.amount,
-			accountId: copy.from,
-			description: copy.description,
-			category: '',
-		};
 
 		try {
 			if (transactionType !== 'transfer') {
-				const res = await fetchData('/api/v1/transactions/add', 'POST', data);
-				console.log('res', res.transaction);
+				await fetchData('/api/v1/transactions/add', 'POST', data);
 			} else {
-				const to = await fetchData('/api/v1/transactions/add', 'POST', transferToData);
-				const from = await fetchData('/api/v1/transactions/add', 'POST', transferFromData);
-				console.log('to', to.transaction);
-				console.log('from', from.transaction);
+				await fetchData('/api/v1/transactions/add', 'POST', transferToData);
+				await fetchData('/api/v1/transactions/add', 'POST', transferFromData);
 			}
-			//navigate('/transactions');
+			navigate('/transactions');
 		} catch (error) {
 			console.error(error);
 			alert(error);
