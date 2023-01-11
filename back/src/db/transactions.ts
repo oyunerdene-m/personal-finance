@@ -1,4 +1,5 @@
 import { Transaction } from '@prisma/client';
+import { omit } from 'lodash';
 import { prisma } from '.';
 
 function getTransactions(userId: number, skip: number = 0, limit: number = 100) {
@@ -14,18 +15,20 @@ function getTransactions(userId: number, skip: number = 0, limit: number = 100) 
     });
 }
 
-async function addTransaction(userId: number, transactionData: Transaction) {
+async function addTransaction(userId: number, data: Omit<Transaction, 'id' | 'user' | 'userId'>) {
     const newTransaction = await prisma.transaction.create({
         data: {
-            ...transactionData,
-            userId,
+            ...omit(data, 'accountId', 'prevTransactionId'),
+            user: { connect: { id: userId } },
+            account: { connect: { id: data.accountId } },
+            prevTransaction: data.prevTransactionId ? { connect: { id: data.prevTransactionId } } : undefined,
         },
     });
 
     return newTransaction;
 }
 
-async function editTransaction(userId: number, id: number, transactionData: Transaction) {
+async function editTransaction(userId: number, id: number, data: Transaction) {
     const transaction = await prisma.transaction.findFirst({ where: { id, userId } });
 
     if (!transaction || transaction.userId !== userId) {
@@ -36,7 +39,7 @@ async function editTransaction(userId: number, id: number, transactionData: Tran
         where: { id },
         data: {
             ...transaction,
-            ...transactionData,
+            ...data,
             amount: transaction.amount,
         },
     });
