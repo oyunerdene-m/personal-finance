@@ -28,44 +28,48 @@ export default function AddTransaction() {
 
 	async function submitHandler(event) {
 		event.preventDefault();
+		const copy = { ...transactionData };
 		let id;
 		if (transactionType === 'income') {
-			id = transactionData.to;
+			id = copy.to;
 		} else if (transactionType === 'expense') {
-			id = transactionData.from;
+			id = copy.from;
 		}
 		const data = {
 			type: transactionType,
-			amount: transactionData.amount,
+			amount: copy.amount,
 			accountId: id,
-			description: transactionData.description,
-			category: '',
+			description: copy.description,
+			category: copy.category,
 		};
 
 		const transferToData = {
 			type: 'income',
-			amount: transactionData.amount,
-			accountId: transactionData.to,
-			description: transactionData.description,
+			amount: copy.amount,
+			accountId: copy.to,
+			description: copy.description,
 			category: '',
 		};
 
 		const transferFromData = {
 			type: 'expense',
-			amount: transactionData.amount,
-			accountId: transactionData.from,
-			description: transactionData.description,
-			category: transactionData.category,
+			amount: copy.amount,
+			accountId: copy.from,
+			description: copy.description,
+			category: '',
 		};
 
 		try {
 			if (transactionType !== 'transfer') {
-				const trans = await fetchData('/api/v1/transactions/add', 'POST', data);
+				const res = await fetchData('/api/v1/transactions/add', 'POST', data);
+				console.log('res', res.transaction);
 			} else {
-				const transTo = await fetchData('/api/v1/transactions/add', 'POST', transferToData);
-				const transFrom = await fetchData('/api/v1/transactions/add', 'POST', transferFromData);
+				const to = await fetchData('/api/v1/transactions/add', 'POST', transferToData);
+				const from = await fetchData('/api/v1/transactions/add', 'POST', transferFromData);
+				console.log('to', to.transaction);
+				console.log('from', from.transaction);
 			}
-			navigate('/transactions');
+			//navigate('/transactions');
 		} catch (error) {
 			console.error(error);
 			alert(error);
