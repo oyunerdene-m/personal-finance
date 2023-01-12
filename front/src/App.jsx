@@ -13,6 +13,7 @@ import AddAccount from './components/Accounts/NewAccount/AddAccount';
 import EditAccount from './components/Accounts/EditAccount';
 import Transactions from './pages/transactions';
 import AddTransaction from './components/Transactions/NewTransaction/AddTransaction';
+import EditTransaction from './components/Transactions/EditTransaction';
 
 function App() {
 	const location = useLocation();
@@ -59,6 +60,7 @@ function App() {
 					<Route path='/accounts/edit/:id' element={<EditAccount />} />
 					<Route path='/transactions' element={<Transactions />}></Route>
 					<Route path='/transactions/new' element={<AddTransaction />}></Route>
+					<Route path='/transactions/edit/:id' element={<EditTransaction />}></Route>
 				</Routes>
 			</AccountsProvider>
 		</>

@@ -30,7 +30,8 @@ export default function AddTransaction() {
 	let id;
 	if (transactionType === 'income') {
 		id = copy.to;
-	} else if (transactionType === 'expense') {
+	}
+	if (transactionType === 'expense') {
 		id = copy.from;
 	}
 	const data = {
@@ -87,6 +88,8 @@ export default function AddTransaction() {
 				onChange={changeHandler}
 				onSubmit={submitHandler}
 				transactionType={transactionType}
+				editedTransaction={transactionData}
+				formType='adding'
 			/>
 		</>
 	);
