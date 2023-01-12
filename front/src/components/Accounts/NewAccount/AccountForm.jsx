@@ -1,3 +1,5 @@
+import Button from '../../UI/Button';
+
 export default function AccountForm({ onChange, onSubmit, editedAccount, formType }) {
 	const accountTypes = ['savings', 'cash', 'loan', 'credit', 'daily'];
 	const currencies = ['EUR', 'USD', 'MNT'];
@@ -76,7 +78,7 @@ export default function AccountForm({ onChange, onSubmit, editedAccount, formTyp
 						))}
 					</select>
 				</div>
-				<button>{formType === 'edit' ? 'Save' : 'Add'}</button>
+				<Button name={formType === 'edit' ? 'Save' : 'Add'} type='submit' />
 			</form>
 		</div>
 	);

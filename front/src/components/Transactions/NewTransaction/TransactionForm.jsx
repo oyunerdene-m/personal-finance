@@ -1,6 +1,8 @@
 import { categories } from '../../../lib/transactionCategories';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AccountsContext } from '../../../context/accounts-context';
+import Button from '../../UI/Button';
 
 export default function TransactionForm({
 	onDescriptionChange,
@@ -170,7 +172,10 @@ export default function TransactionForm({
 						</select>
 					</div>
 				)}
-				<button>Add</button>
+				<Button name='Add' type='submit' />
+				<Link to='/transactions'>
+					<Button name='Cancel' type='button' />
+				</Link>
 			</form>
 		</div>
 	);
