@@ -3,16 +3,32 @@ export default function AccountForm({ onChange, onSubmit, editedAccount, formTyp
 	const currencies = ['EUR', 'USD', 'MNT'];
 
 	return (
-		<>
+		<div className='w-full max-w-xs'>
 			<h3>{formType === 'edit' ? 'Edit' : 'Add'} account</h3>
-			<form onSubmit={onSubmit}>
-				<div>
-					<label htmlFor='name'>Account name:</label>
-					<input value={editedAccount.name} onChange={onChange} type='text' id='name' name='name' />
-				</div>
-				<div>
-					<label htmlFor='amount'>Amount:</label>
+			<form
+				onSubmit={onSubmit}
+				className='relative bg-white shadow-2xl rounded px-8 pt-6 pb-8 mb-4'
+			>
+				<span className='absolute right-2 top-2 cursor-pointer'>close</span>
+				<div className='mb-4'>
+					<label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='name'>
+						Account name:
+					</label>
 					<input
+						className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+						value={editedAccount.name}
+						onChange={onChange}
+						type='text'
+						id='name'
+						name='name'
+					/>
+				</div>
+				<div className='mb-4'>
+					<label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='amount'>
+						Amount:
+					</label>
+					<input
+						className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 						value={editedAccount.amount}
 						onChange={onChange}
 						type='number'
@@ -21,8 +37,10 @@ export default function AccountForm({ onChange, onSubmit, editedAccount, formTyp
 						min={0}
 					/>
 				</div>
-				<div>
-					<label htmlFor='type'>Type:</label>
+				<div className='mb-4'>
+					<label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='type'>
+						Type:
+					</label>
 					<select value={editedAccount.type} onChange={onChange} name='type' id='type'>
 						<option value=''>--Choose type--</option>
 						{accountTypes.map((type) => (
@@ -32,9 +50,12 @@ export default function AccountForm({ onChange, onSubmit, editedAccount, formTyp
 						))}
 					</select>
 				</div>
-				<div>
-					<label htmlFor='description'>Description:</label>
+				<div className='mb-4'>
+					<label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='description'>
+						Description:
+					</label>
 					<input
+						className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 						value={editedAccount.description}
 						onChange={onChange}
 						type='text'
@@ -43,7 +64,9 @@ export default function AccountForm({ onChange, onSubmit, editedAccount, formTyp
 					/>
 				</div>
 				<div>
-					<label htmlFor='currency'>Currency:</label>
+					<label className='text-gray-700 text-sm font-bold mb-2 mr-3' htmlFor='currency'>
+						Currency:
+					</label>
 					<select value={editedAccount.currency} onChange={onChange} name='currency' id='currency'>
 						<option value=''>--Choose currency--</option>
 						{currencies.map((cur) => (
@@ -55,6 +78,6 @@ export default function AccountForm({ onChange, onSubmit, editedAccount, formTyp
 				</div>
 				<button>{formType === 'edit' ? 'Save' : 'Add'}</button>
 			</form>
-		</>
+		</div>
 	);
 }

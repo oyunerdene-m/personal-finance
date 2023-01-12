@@ -32,7 +32,7 @@ export default function Transactions({ path }) {
 			)}
 
 			<Link to='/transactions/new'>
-				<button>Add Transaction</button>
+				<button className='bg-yellow-700'>Add Transaction</button>
 			</Link>
 			<h1>Transactions:</h1>
 			<TransactionList transactions={transactions} isTransactionsLoading={isTransactionsLoading} />

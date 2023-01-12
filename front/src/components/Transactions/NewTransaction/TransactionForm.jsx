@@ -20,9 +20,12 @@ export default function TransactionForm({
 	let account;
 	if (transactionType === 'income') {
 		account = (
-			<div>
-				<label htmlFor='to'>To</label>
+			<div className='mb-4'>
+				<label className='block text-sm font-bold mb-2' htmlFor='to'>
+					To
+				</label>
 				<select
+					className='shadow appearance-none border rounded w-full py-2 px-3 text-light-blue leading-tight focus:outline-none focus:shadow-outline'
 					defaultValue={formType === 'editing' && foundAccount.id}
 					onChange={onChange}
 					name='to'
@@ -41,9 +44,12 @@ export default function TransactionForm({
 		);
 	} else if (transactionType === 'expense') {
 		account = (
-			<div>
-				<label htmlFor='from'>From</label>
+			<div className='mb-4'>
+				<label className='block text-sm font-bold mb-2' htmlFor='from'>
+					From
+				</label>
 				<select
+					className='shadow appearance-none border rounded w-full py-2 px-3 text-light-blue leading-tight focus:outline-none focus:shadow-outline'
 					defaultValue={formType === 'editing' && foundAccount.id}
 					onChange={onChange}
 					name='from'
@@ -64,9 +70,12 @@ export default function TransactionForm({
 		account = (
 			<>
 				{' '}
-				<div>
-					<label htmlFor='from'>From:</label>
+				<div className='mb-4'>
+					<label className='block text-sm font-bold mb-2' htmlFor='from'>
+						From:
+					</label>
 					<select
+						className='shadow appearance-none border rounded w-full py-2 px-3 text-light-blue leading-tight focus:outline-none focus:shadow-outline'
 						defaultValue={formType === 'editing' && foundAccount.id}
 						onChange={onChange}
 						name='from'
@@ -82,9 +91,12 @@ export default function TransactionForm({
 						})}
 					</select>
 				</div>
-				<div>
-					<label htmlFor='to'>To:</label>
+				<div className='mb-4'>
+					<label className='block text-sm font-bold mb-2' htmlFor='to'>
+						To:
+					</label>
 					<select
+						className='shadow appearance-none border rounded w-full py-2 px-3 text-light-blue leading-tight focus:outline-none focus:shadow-outline'
 						defaultValue={formType === 'editing' && foundAccount.id}
 						onChange={onChange}
 						name='to'
@@ -105,11 +117,14 @@ export default function TransactionForm({
 	}
 
 	return (
-		<>
-			<form onSubmit={onSubmit}>
-				<div>
-					<label htmlFor='amount'>Amount:</label>
+		<div className='w-full text-left'>
+			<form className='bg-white shadow-xl rounded px-8 pt-6 pb-6' onSubmit={onSubmit}>
+				<div className='mb-4'>
+					<label className='block text-sm font-bold mb-2' htmlFor='amount'>
+						Amount:
+					</label>
 					<input
+						className='shadow appearance-none border rounded w-full py-2 px-3 text-light-blue leading-tight focus:outline-none focus:shadow-outline'
 						value={editedTransaction.amount}
 						onChange={onChange}
 						type='amount'
@@ -119,9 +134,12 @@ export default function TransactionForm({
 					/>
 				</div>
 				{account}
-				<div>
-					<label htmlFor='description'>Description:</label>
+				<div className='mb-4'>
+					<label className='block text-sm font-bold mb-2' htmlFor='description'>
+						Description:
+					</label>
 					<input
+						className='shadow appearance-none border rounded w-full py-2 px-3 text-light-blue leading-tight focus:outline-none focus:shadow-outline'
 						value={editedTransaction.description}
 						onChange={formType === 'adding' ? onChange : onDescriptionChange}
 						type='text'
@@ -131,8 +149,11 @@ export default function TransactionForm({
 				</div>
 				{(transactionType === 'income' || transactionType === 'expense') && (
 					<div>
-						<label htmlFor='category'>Category:</label>
+						<label className='block text-sm font-bold mb-2' htmlFor='category'>
+							Category:
+						</label>
 						<select
+							className='shadow appearance-none border rounded w-full py-2 px-3 text-light-blue leading-tight focus:outline-none focus:shadow-outline'
 							value={editedTransaction.category}
 							onChange={formType === 'adding' ? onChange : onCategoryChange}
 							name='category'
@@ -151,6 +172,6 @@ export default function TransactionForm({
 				)}
 				<button>Add</button>
 			</form>
-		</>
+		</div>
 	);
 }

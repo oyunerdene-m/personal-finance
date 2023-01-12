@@ -29,7 +29,7 @@ export default function Accounts({ path }) {
 			)}
 
 			<Link to='/accounts/new'>
-				<button>Add account</button>
+				<button className='bg-yellow-700'>Add account</button>
 			</Link>
 			<AccountList accounts={accounts} onDelete={deleteAccountHandler} />
 		</>
