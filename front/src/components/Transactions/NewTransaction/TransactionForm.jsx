@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import { AccountsContext } from '../../../context/accounts-context';
 
 export default function TransactionForm({
+	onDescriptionChange,
+	onCategoryChange,
 	transactionType,
 	onChange,
 	onSubmit,
@@ -121,7 +123,7 @@ export default function TransactionForm({
 					<label htmlFor='description'>Description:</label>
 					<input
 						value={editedTransaction.description}
-						onChange={onChange}
+						onChange={formType === 'adding' ? onChange : onDescriptionChange}
 						type='text'
 						id='description'
 						name='description'
@@ -132,7 +134,7 @@ export default function TransactionForm({
 						<label htmlFor='category'>Category:</label>
 						<select
 							value={editedTransaction.category}
-							onChange={onChange}
+							onChange={formType === 'adding' ? onChange : onCategoryChange}
 							name='category'
 							id='category'
 						>
