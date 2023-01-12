@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import TransactionList from '../components/Transactions/Transactions/TransactionList';
 import { fetchData } from '../lib/fetchData';
 
-export default function Transactions() {
+export default function Transactions({ path }) {
 	const [transactions, setTransactions] = useState([]);
 	const [isTransactionsLoading, setIsTransactionsLoading] = useState(true);
 
@@ -25,10 +25,16 @@ export default function Transactions() {
 
 	return (
 		<>
+			{path !== '/dashboard' && (
+				<Link to='/dashboard'>
+					<p>go to Dashboard</p>
+				</Link>
+			)}
+
 			<Link to='/transactions/new'>
 				<button>Add Transaction</button>
 			</Link>
-			<h1>Transactions page!</h1>
+			<h1>Transactions:</h1>
 			<TransactionList transactions={transactions} isTransactionsLoading={isTransactionsLoading} />
 		</>
 	);

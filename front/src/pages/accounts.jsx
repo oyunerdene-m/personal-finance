@@ -4,7 +4,7 @@ import { AccountsContext } from '../context/accounts-context';
 import AccountList from '../components/Accounts/Accounts/AccountList';
 import { fetchData } from '../lib/fetchData';
 
-export default function Accounts() {
+export default function Accounts({ path }) {
 	const { accounts, setAccounts, isAccountsLoading } = useContext(AccountsContext);
 
 	if (accounts.length === 0) return <h4>There is no accounts yet.</h4>;
@@ -22,8 +22,14 @@ export default function Accounts() {
 
 	return (
 		<>
-			<Link to='/dashboard'>
-				<p>go to Dashboard</p>
+			{path !== '/dashboard' && (
+				<Link to='/dashboard'>
+					<p>go to Dashboard</p>
+				</Link>
+			)}
+
+			<Link to='/accounts/new'>
+				<button>Add account</button>
 			</Link>
 			<AccountList accounts={accounts} onDelete={deleteAccountHandler} />
 		</>
