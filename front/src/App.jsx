@@ -14,7 +14,13 @@ import EditAccount from './components/Accounts/EditAccount';
 import Transactions from './pages/transactions';
 import AddTransaction from './components/Transactions/NewTransaction/AddTransaction';
 import EditTransaction from './components/Transactions/EditTransaction';
-import { logoIcon, userIcon, homeIcon, transactionsIcon, accountsIcon } from './assets/icons/icons';
+import {
+	logoIcon,
+	userIcon,
+	dashboardIcon,
+	transactionsIcon,
+	accountsIcon,
+} from './assets/icons/icons';
 
 function App() {
 	const location = useLocation();
@@ -43,36 +49,44 @@ function App() {
 
 	const loddedInState = (
 		<div className='container-fluid'>
-			<div style={{ border: '1px solid red' }}>
-				<nav style={{ border: '1px solid purple' }}>
-					<ul>
-						<li>
-							<span>{logoIcon}</span>
-							<p>MY FINANCE</p>
-						</li>
-						<li>
-							<span>{homeIcon}</span>
-							<Link to='/dashboard'>Dashboard</Link>
-						</li>
-						<li>
-							<span>{userIcon}</span>
-							<p>
-								Hello, {currentUser.name}
-								<Link onClick={logoutHandler} to='/login'>
-									Logout
-								</Link>
-							</p>
-						</li>
-						<li>
-							<span>{accountsIcon}</span>
-							<Link to='/accounts'>Accounts</Link>
-						</li>
-						<li>
-							<span>{transactionsIcon}</span>
-							<Link to='/transactions'>Transactions</Link>
-						</li>
-					</ul>
-				</nav>
+			<div
+				style={{ border: '1px solid red' }}
+				className='container mx-auto p-7 lg:flex w-full md:columns-2'
+			>
+				<div
+					style={{ border: '1px solid purple' }}
+					className='md:basis-1/5 flex flex-col p-10 w-full md:border-r-[1px] md:border-light-gray'
+				>
+					<nav>
+						<ul>
+							<li className='font-extrabold uppercase text-xl	mb-20 flex'>
+								<span>{logoIcon}</span>
+								<Link to='/dashboard'>My Finance</Link>
+							</li>
+							<li className='flex mb-7'>
+								<span>{dashboardIcon}</span>
+								<Link to='/dashboard'>Dashboard</Link>
+							</li>
+							<li className='flex mb-7'>
+								<span>{userIcon}</span>
+								<p>
+									<span className='mr-2'>Hello, {currentUser.name}</span>
+									<Link className='font-medium italic' onClick={logoutHandler} to='/login'>
+										Logout
+									</Link>
+								</p>
+							</li>
+							<li className='flex mb-7'>
+								<span>{accountsIcon}</span>
+								<Link to='/accounts'>Accounts</Link>
+							</li>
+							<li className='flex'>
+								<span>{transactionsIcon}</span>
+								<Link to='/transactions'>Transactions</Link>
+							</li>
+						</ul>
+					</nav>
+				</div>
 				<AccountsProvider>
 					<Routes>
 						<Route exact path='/dashboard' element={<Dashboard />} />
