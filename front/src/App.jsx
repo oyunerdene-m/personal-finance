@@ -14,6 +14,7 @@ import EditAccount from './components/Accounts/EditAccount';
 import Transactions from './pages/transactions';
 import AddTransaction from './components/Transactions/NewTransaction/AddTransaction';
 import EditTransaction from './components/Transactions/EditTransaction';
+import { logoIcon, userIcon, homeIcon, transactionsIcon, accountsIcon } from './assets/icons/icons';
 
 function App() {
 	const location = useLocation();
@@ -41,29 +42,50 @@ function App() {
 	}
 
 	const loddedInState = (
-		<>
-			<nav>
-				<ul>
-					<li>
-						{currentUser && `Hello, ${currentUser.name}`}{' '}
-						<Link onClick={logoutHandler} to='/login'>
-							Logout
-						</Link>
-					</li>
-				</ul>
-			</nav>
-			<AccountsProvider>
-				<Routes>
-					<Route exact path='/dashboard' element={<Dashboard />} />
-					<Route path='/accounts' element={<Accounts />} />
-					<Route path='/accounts/new' element={<AddAccount />} />
-					<Route path='/accounts/edit/:id' element={<EditAccount />} />
-					<Route path='/transactions' element={<Transactions />}></Route>
-					<Route path='/transactions/new' element={<AddTransaction />}></Route>
-					<Route path='/transactions/edit/:id' element={<EditTransaction />}></Route>
-				</Routes>
-			</AccountsProvider>
-		</>
+		<div className='container-fluid'>
+			<div style={{ border: '1px solid red' }}>
+				<nav style={{ border: '1px solid purple' }}>
+					<ul>
+						<li>
+							<span>{logoIcon}</span>
+							<p>MY FINANCE</p>
+						</li>
+						<li>
+							<span>{homeIcon}</span>
+							<Link to='/dashboard'>Dashboard</Link>
+						</li>
+						<li>
+							<span>{userIcon}</span>
+							<p>
+								Hello, {currentUser.name}
+								<Link onClick={logoutHandler} to='/login'>
+									Logout
+								</Link>
+							</p>
+						</li>
+						<li>
+							<span>{accountsIcon}</span>
+							<Link to='/accounts'>Accounts</Link>
+						</li>
+						<li>
+							<span>{transactionsIcon}</span>
+							<Link to='/transactions'>Transactions</Link>
+						</li>
+					</ul>
+				</nav>
+				<AccountsProvider>
+					<Routes>
+						<Route exact path='/dashboard' element={<Dashboard />} />
+						<Route path='/accounts' element={<Accounts />} />
+						<Route path='/accounts/new' element={<AddAccount />} />
+						<Route path='/accounts/edit/:id' element={<EditAccount />} />
+						<Route path='/transactions' element={<Transactions />}></Route>
+						<Route path='/transactions/new' element={<AddTransaction />}></Route>
+						<Route path='/transactions/edit/:id' element={<EditTransaction />}></Route>
+					</Routes>
+				</AccountsProvider>
+			</div>
+		</div>
 	);
 
 	const notLoggedInState = (
