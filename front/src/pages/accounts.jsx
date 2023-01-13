@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AccountsContext } from '../context/accounts-context';
 import AccountList from '../components/Accounts/Accounts/AccountList';
 import { fetchData } from '../lib/fetchData';
+import { addIconWithBorder } from '../assets/icons/icons';
 
 export default function Accounts({ path }) {
 	const { accounts, setAccounts, isAccountsLoading } = useContext(AccountsContext);
@@ -28,9 +29,12 @@ export default function Accounts({ path }) {
 				</Link>
 			)}
 
-			<Link to='/accounts/new'>
-				<button className='bg-yellow-700'>Add account</button>
-			</Link>
+			<div className='flex justify-between mb-4'>
+				<h3>Your accounts</h3>
+				<Link to='/accounts/new'>
+					<button className='bg-yellow-700'>{addIconWithBorder}</button>
+				</Link>
+			</div>
 			<AccountList accounts={accounts} onDelete={deleteAccountHandler} />
 		</>
 	);

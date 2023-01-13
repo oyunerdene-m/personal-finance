@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import TransactionList from '../components/Transactions/Transactions/TransactionList';
 import { fetchData } from '../lib/fetchData';
+import { addIconWithBorder } from '../assets/icons/icons';
 
 export default function Transactions({ path }) {
 	const [transactions, setTransactions] = useState([]);
@@ -30,11 +31,13 @@ export default function Transactions({ path }) {
 					<p>go to Dashboard</p>
 				</Link>
 			)}
+			<div className='flex justify-between mb-4 pt-5'>
+				<h3>Your transactions</h3>
+				<Link to='/transactions/new'>
+					<button className='bg-yellow-700'>{addIconWithBorder}</button>
+				</Link>
+			</div>
 
-			<Link to='/transactions/new'>
-				<button className='bg-yellow-700'>Add Transaction</button>
-			</Link>
-			<h1>Transactions:</h1>
 			<TransactionList transactions={transactions} isTransactionsLoading={isTransactionsLoading} />
 		</>
 	);
