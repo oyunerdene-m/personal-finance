@@ -51,15 +51,15 @@ function App() {
 		<div className='container-fluid'>
 			<div
 				style={{ border: '1px solid red' }}
-				className='container mx-auto p-7 lg:flex w-full md:columns-2'
+				className='container mx-auto p-7 lg:flex w-full md:columns-2 bg-background-color'
 			>
 				<div
 					style={{ border: '1px solid purple' }}
-					className='md:basis-1/5 flex flex-col p-10 w-full md:border-r-[1px] md:border-light-gray'
+					className='md:basis-1/6 flex flex-col p-10 w-full md:border-r-[1px] md:border-light-gray'
 				>
 					<nav>
 						<ul>
-							<li className='font-extrabold uppercase text-xl	mb-20 flex'>
+							<li className='font-semibold uppercase text-xl	mb-20 flex'>
 								<span>{logoIcon}</span>
 								<Link to='/dashboard'>My Finance</Link>
 							</li>

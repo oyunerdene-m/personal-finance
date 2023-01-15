@@ -25,7 +25,7 @@ module.exports = {
 			'card-dark': '#151632',
 		},
 		maxHeight: {
-			56: '15.2rem',
+			56: '14.8rem',
 		},
 
 		extend: {},

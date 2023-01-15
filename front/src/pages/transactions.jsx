@@ -1,29 +1,35 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import TransactionList from '../components/Transactions/Transactions/TransactionList';
-import { fetchData } from '../lib/fetchData';
 import { addIconWithBorder } from '../assets/icons/icons';
+import { getLast3Transactions, sortedTransactions } from '../lib/stats';
+import { useState, useEffect } from 'react';
+import { fetchData } from '../lib/fetchData';
 
-export default function Transactions({ path }) {
+export default function Transactions() {
 	const [transactions, setTransactions] = useState([]);
-	const [isTransactionsLoading, setIsTransactionsLoading] = useState(true);
-
+	const [transactionsLoading, setTransactionsLoading] = useState(true);
+	const location = useLocation();
+	const path = location.pathname;
 	useEffect(() => {
 		async function getTransactions() {
 			try {
-				setIsTransactionsLoading(true);
+				setTransactionsLoading(true);
 				const data = await fetchData('/api/v1/transactions', 'GET', undefined);
 				setTransactions(data.transactions);
 			} catch (error) {
 				console.error(error);
 				alert(error);
 			} finally {
-				setIsTransactionsLoading(false);
+				setTransactionsLoading(false);
 			}
 		}
 		getTransactions();
 	}, []);
 
+	const sorted = sortedTransactions([...transactions]);
+	const last3Transactions = getLast3Transactions([...sorted]);
+
+	if (transactionsLoading) return 'Loading...';
 	return (
 		<>
 			{path !== '/dashboard' && (
@@ -38,7 +44,11 @@ export default function Transactions({ path }) {
 				</Link>
 			</div>
 
-			<TransactionList transactions={transactions} isTransactionsLoading={isTransactionsLoading} />
+			{path === '/dashboard' ? (
+				<TransactionList transactions={last3Transactions} />
+			) : (
+				<TransactionList transactions={sorted} />
+			)}
 		</>
 	);
 }
