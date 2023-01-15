@@ -59,7 +59,7 @@ export default function EditTransaction() {
 	}
 
 	return (
-		<>
+		<div>
 			<TransactionButtons transactionType={editedTransaction.type} setTransactionType={() => {}} />
 			<TransactionForm
 				editedTransaction={editedTransaction}
@@ -70,6 +70,6 @@ export default function EditTransaction() {
 				onSubmit={submitHandler}
 				formType='editing'
 			/>
-		</>
+		</div>
 	);
 }

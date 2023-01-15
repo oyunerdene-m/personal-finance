@@ -172,10 +172,12 @@ export default function TransactionForm({
 						</select>
 					</div>
 				)}
-				<Button name='Add' type='submit' />
-				<Link to='/transactions'>
-					<Button name='Cancel' type='button' />
-				</Link>
+				<div className='flex justify-between'>
+					<Button name='Add' type='submit' />
+					<Link to='/transactions'>
+						<Button name='Cancel' type='button' />
+					</Link>
+				</div>
 			</form>
 		</div>
 	);

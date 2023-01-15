@@ -76,7 +76,7 @@ export default function AddTransaction() {
 	}
 
 	return (
-		<>
+		<div>
 			<Link to='/transactions'>Go to transactions page</Link>
 
 			<TransactionButtons
@@ -91,6 +91,6 @@ export default function AddTransaction() {
 				editedTransaction={transactionData}
 				formType='adding'
 			/>
-		</>
+		</div>
 	);
 }

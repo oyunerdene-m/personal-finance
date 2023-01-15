@@ -25,7 +25,7 @@ import {
 function App() {
 	const location = useLocation();
 	const { currentUser, isUserLoading } = useContext(CurrentUserContext);
-
+	console.log(currentUser);
 	async function logoutHandler() {
 		try {
 			await fetchData('/api/v1/users/logout', 'GET', undefined);
@@ -36,8 +36,6 @@ function App() {
 		}
 	}
 
-	if (isUserLoading) return 'Loading...';
-
 	const path = location.pathname;
 
 	if (!currentUser && path !== '/login' && path !== '/signup') {
@@ -47,15 +45,16 @@ function App() {
 		return <Navigate to='/dashboard' />;
 	}
 
-	const loddedInState = (
+	if (isUserLoading) return 'Loading...';
+	return currentUser ? (
 		<div className='container-fluid'>
 			<div
 				style={{ border: '1px solid red' }}
-				className='container mx-auto p-7 lg:flex w-full md:columns-2 bg-background-color'
+				className='container mx-auto p-2 lg:flex w-full md:columns-2 bg-background-color h-screen'
 			>
 				<div
 					style={{ border: '1px solid purple' }}
-					className='md:basis-1/6 flex flex-col p-10 w-full md:border-r-[1px] md:border-light-gray'
+					className='md:basis-1/6 flex flex-col px-6 py-10 w-full md:border-r-[1px] md:border-light-gray'
 				>
 					<nav>
 						<ul>
@@ -100,10 +99,8 @@ function App() {
 				</AccountsProvider>
 			</div>
 		</div>
-	);
-
-	const notLoggedInState = (
-		<>
+	) : (
+		<div className='md:basis-1/6 flex flex-col p-10 w-full md:border-r-[1px] md:border-light-gray'>
 			<nav>
 				<ul>
 					<li>
@@ -119,10 +116,8 @@ function App() {
 				<Route exact path='/login' element={<Login />} />
 				<Route exact path='/' element={<Home />} />
 			</Routes>
-		</>
+		</div>
 	);
-
-	return currentUser ? loddedInState : notLoggedInState;
 }
 
 export default App;

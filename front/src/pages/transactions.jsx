@@ -31,7 +31,7 @@ export default function Transactions() {
 
 	if (transactionsLoading) return 'Loading...';
 	return (
-		<>
+		<div className='md:basis-4/6'>
 			{path !== '/dashboard' && (
 				<Link to='/dashboard'>
 					<p>go to Dashboard</p>
@@ -49,6 +49,6 @@ export default function Transactions() {
 			) : (
 				<TransactionList transactions={sorted} />
 			)}
-		</>
+		</div>
 	);
 }

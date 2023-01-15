@@ -56,10 +56,10 @@ export default function Dashboard() {
 						<span>$2002</span>
 					</div>
 				</div>
-				<div className='pt-7 pb-6 border-b-[1px] border-light-gray max-h-56 overflow-y-scroll'>
+				<div className='pt-7 pb-6 border-b-[1px] border-light-gray max-h-56 overflow-y-scroll '>
 					<Accounts path={path} />
 				</div>
-				<div className='pt-2'>
+				<div className='pt-2 overflow-y-scroll max-h-54'>
 					<Transactions />
 				</div>
 			</div>

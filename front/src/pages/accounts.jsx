@@ -22,7 +22,7 @@ export default function Accounts({ path }) {
 	}
 
 	return (
-		<>
+		<div className='md:basis-4/6 overflow-y-scroll' style={{ border: '1px solid pink' }}>
 			{path !== '/dashboard' && (
 				<Link to='/dashboard'>
 					<p>go to Dashboard</p>
@@ -36,6 +36,6 @@ export default function Accounts({ path }) {
 				</Link>
 			</div>
 			<AccountList accounts={accounts} onDelete={deleteAccountHandler} />
-		</>
+		</div>
 	);
 }

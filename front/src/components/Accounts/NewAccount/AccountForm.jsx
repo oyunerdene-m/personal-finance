@@ -1,4 +1,6 @@
 import Button from '../../UI/Button';
+import { closeIcon } from '../../../assets/icons/icons';
+import { Link } from 'react-router-dom';
 
 export default function AccountForm({ onChange, onSubmit, editedAccount, formType }) {
 	const accountTypes = ['savings', 'cash', 'loan', 'credit', 'daily'];
@@ -11,7 +13,10 @@ export default function AccountForm({ onChange, onSubmit, editedAccount, formTyp
 				onSubmit={onSubmit}
 				className='relative bg-white shadow-2xl rounded px-8 pt-6 pb-8 mb-4'
 			>
-				<span className='absolute right-2 top-2 cursor-pointer'>close</span>
+				<Link to='/accounts'>
+					<span className='absolute right-2 top-2 cursor-pointer'>{closeIcon}</span>
+				</Link>
+
 				<div className='mb-4'>
 					<label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='name'>
 						Account name:

@@ -37,5 +37,5 @@ export function sortedTransactions(transactions) {
 }
 
 export function getLast3Transactions(transactions) {
-	return transactions.slice(-3);
+	return transactions.slice(-2);
 }
